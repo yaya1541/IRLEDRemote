@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="B11">ON/OFF</string>
+    <string name="B12"></string>
+    <string name="B13">L UP</string>
+    <string name="B14">L DOWN</string>
+    <string name="B21">WHITE</string>
+    <string name="B22">RED</string>
+    <string name="B23">GREEN</string>
+    <string name="B24">BLUE</string>
+    <string name="B31"></string>
+    <string name="B32"></string>
+    <string name="B33"></string>
+    <string name="B34"></string>
+    <string name="B41"></string>
+    <string name="B42"></string>
+    <string name="B43"></string>
+    <string name="B44"></string>
+</resources>
