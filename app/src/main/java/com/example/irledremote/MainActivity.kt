@@ -4,17 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.hardware.ConsumerIrManager
 import android.os.Bundle
-import android.text.Editable
-import android.view.KeyEvent
-import android.view.MenuItem
 import android.view.View
-import android.view.View.OnKeyListener
-import android.view.inputmethod.CompletionInfo
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
-import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.system.exitProcess
@@ -81,40 +73,9 @@ fun irHexComToSig(hexCommand:String): ArrayList<Int> {
 
 var repeatSig = arrayListOf<Int>(9000,2250,562,96187)
 
-fun numToDeviceAndCommand(deviceNumber:Int,commandNumber: Int){
-
-}
-
-class MainActivity : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val buttonColumn = 5; val buttonLine = 8
-
-        /* button list */
-        val buttonList : ArrayList<ArrayList<Button>> = arrayListOf()
-        /* command list */
-        val buttonCommand : ArrayList<MutableList<String>> = arrayListOf()
-
-        val text : TextView = findViewById(R.id.textView)
-        val bt : Button = findViewById(resources.getIdentifier("button1_1","id",packageName))
-
-        bt.setOnClickListener{ text.text = kotlin.random.Random(1).toString() }
-        var k = ""
-
-        val manager : (ConsumerIrManager) = getSystemService(Context.CONSUMER_IR_SERVICE) as ConsumerIrManager;
-
-        val addressInput : EditText = findViewById(R.id.adress)
-
-        addressInput.setOnEditorActionListener { view, i, _ ->
-            text.text= view.text
-            view.visibility = View.INVISIBLE
-            return@setOnEditorActionListener true
-        }
-
-        /*
-        power               64  1
+val command = arrayListOf<String>("02","3C","DC","1C","EC","2C","CC","0C","F4","34","D4","14")
+/*
+        power 02            64  1
                             63
                             62
                             61
@@ -138,7 +99,7 @@ class MainActivity : AppCompatActivity() {
         ligher puple D4     43  11
                             42
                             41
-        purple 14           40  12
+        purple 14           40  12 ___
         vlight purple E4    39  13
                             38
                             37
@@ -180,21 +141,54 @@ class MainActivity : AppCompatActivity() {
                             1
                             0
          */
+fun hexToDeviceAndCommand(){
+
+}
+
+class MainActivity : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val buttonColumn = 5; val buttonLine = 9
+        /* button list */
+        val buttonList : ArrayList<MutableList<Button>> = arrayListOf()
+        /* command list */
+        val buttonCommand : ArrayList<MutableList<String>> = arrayListOf()
+
+        val text : TextView = findViewById(R.id.textView)
+        /*
+        val bt : Button = findViewById(resources.getIdentifier("button1_1","id",packageName))
+        bt.setOnClickListener{ text.text = kotlin.random.Random(1).toString() }
+        var k = ""
+         */
+
+        val manager : (ConsumerIrManager) = getSystemService(Context.CONSUMER_IR_SERVICE) as ConsumerIrManager;
+        val addressInput : EditText = findViewById(R.id.address)
+        addressInput.setOnEditorActionListener { view, _, _ ->
+            text.text= view.text
+            view.visibility = View.INVISIBLE
+            return@setOnEditorActionListener true
+        }
 
         if (manager.hasIrEmitter()){
-            for(i in 1..buttonLine){
-                buttonList.add(arrayListOf())
-                for (j in 1..buttonColumn){
-                    /*buttonList[i-1].add(j-1)*/
-                    k += "button${i}_${j}"
 
+            for(i in 1..buttonLine){
+                buttonList.add(mutableListOf())
+                buttonCommand.add(mutableListOf())
+
+                for (j in 1..buttonColumn){
+                    /*
+                    buttonList[i-1].add(j-1)
+                    k += "button${i}_${j}"
+                    */
                     val resID = resources.getIdentifier("button${i}_${j}","id",packageName)
 
                     buttonList[i-1].add(findViewById(resID))
+                    buttonCommand[i-1].add("00FF00FF")
 
                     buttonList[i-1][j-1].setOnClickListener {
                         text.text = "button${i}_${j}"
-
                         manager.transmit(FREQUENCY, irHexComToSig(buttonCommand[i-1][j-1]).toIntArray())
 
                     }
@@ -204,11 +198,11 @@ class MainActivity : AppCompatActivity() {
                         buttonList[i-1][j-1].isPressed = false
                         manager.transmit(38222, irHexComToSig("00FF02FD").toIntArray())
                         manager.transmit(38222, repeatSig.toIntArray())
-
                         return@setOnLongClickListener true
                     }
                 }
             }
+            text.text = buttonList.size.toString() + buttonList[0].size.toString()
         }else{
             setContentView(R.layout.activity_no_emitter)
             val quit : Button = findViewById(R.id.button_quit)
@@ -222,7 +216,9 @@ class MainActivity : AppCompatActivity() {
         tmp += decToHex("254")
         tmp += decToHex("64")
         tmp += decToHex((256-64).toString())
-        text.text = tmp
+        /*text.text = tmp
+
+         */
 
     }
 }
