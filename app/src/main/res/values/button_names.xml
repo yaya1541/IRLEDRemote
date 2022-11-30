@@ -1,19 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--FIRST LINE-->
     <string name="B11">ON/OFF</string>
     <string name="B12"></string>
     <string name="B13">L UP</string>
     <string name="B14">L DOWN</string>
+    <string name="B15"></string>
+    <!--SECOND LINE-->
     <string name="B21">WHITE</string>
     <string name="B22">RED</string>
     <string name="B23">GREEN</string>
     <string name="B24">BLUE</string>
+    <string name="B25"></string>
+    <!--THIRD LINE-->
     <string name="B31"></string>
     <string name="B32"></string>
     <string name="B33"></string>
     <string name="B34"></string>
+    <string name="B35"></string>
+    <!--FOURTH LINE-->
     <string name="B41"></string>
     <string name="B42"></string>
     <string name="B43"></string>
     <string name="B44"></string>
+    <string name="B45"></string>
+    <!--FIFTH LINE-->
+    <string name="B51"></string>
+    <string name="B52"></string>
+    <string name="B53"></string>
+    <string name="B54"></string>
+    <string name="B55"></string>
+    <!--SIXTH LINE-->
+    <string name="B61"></string>
+    <string name="B62"></string>
+    <string name="B63"></string>
+    <string name="B64"></string>
+    <string name="B65"></string>
+    <!--SEVENTH LINE-->
+    <string name="B71"></string>
+    <string name="B72"></string>
+    <string name="B73"></string>
+    <string name="B74"></string>
+    <string name="B75"></string>
 </resources>

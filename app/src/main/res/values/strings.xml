@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">IR LED Remote</string>
+    <string name="no_emitter" translatable="false">You don\'t have an IR Blaster</string>
 </resources>
